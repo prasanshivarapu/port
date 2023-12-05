@@ -428,3 +428,6 @@
 .testimonial-carousel .owl-dot.active::after {
     background: var(--primary);
 }
+.text-danger{
+    color: red;
+}

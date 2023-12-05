@@ -7,8 +7,8 @@
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Portfolio of Prasanna Kumar Shivarapu" name="description">
-    <meta content="prasanna kumar shivarapu, portfolio" name="keywords">
-    
+    <meta content="prasannakumarshivarapuportfolio, portfolio" name="keywords">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -31,9 +31,29 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+    .text-danger {
+      color: red;
+    }
+
+    .message-container {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .success-message {
+      color: green;
+    }
+
+    .error-message {
+      color: red;
+    }
+  </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51" ng-app="myApp" ng-controller="myCtrl">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -263,37 +283,198 @@
             </div>
         </div>
     </div>
-
-    <div class="container pb-5" id="contact">
-        <div class="container py-5 text-center">
+    <div class="container-xxl pb-5" id="contact">
+        <div class="container py-5">
             <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-12">
+                <div class="col-lg-6">
                     <h1 class="display-5 mb-0">Let's Work Together</h1>
                 </div>
-              
+                <div class="col-lg-6 text-lg-end">
+                    <a class="btn btn-primary py-3 px-5" href="">Say Hello</a>
+                </div>
             </div>
             <div class="row g-5">
-                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="mb-2">Contact Me:</p>
-                    <h3 class="fw-bold">Hyderabad telangana</h3>
+                <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                   
+                    <h3 class="fw-bold">Hyderabad</h3>
                     <hr class="w-100">
                     <p class="mb-2">Call me:</p>
-                    <h3 class="fw-bold">+91 8688859874</h3>
+                    <h3 class="fw-bold">+918688859874</h3>
                     <hr class="w-100">
                     <p class="mb-2">Mail me:</p>
                     <h3 class="fw-bold">prasan.shivarapu@gmail.com</h3>
                     <hr class="w-100">
                     <p class="mb-2">Follow me:</p>
-                    <div class="d-flex justify-content-center m-auto">
-                        
-                      
+                    <div class="d-flex pt-2">
                         <a class="btn btn-square btn-primary me-2" href="https://www.linkedin.com/in/prasanshivarapu" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
+                <div class="col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                  
+                    <!-- <form name="myForm" 
+                 
+            ng-submit="myForm.$valid && submitForm()"
+            novalidate
+                    >
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" required class="form-control" id="name1" ng-pattern="/^[a-zA-Z]+$/" placeholder="Your Name" name="name1" ng-model="formData.name1">
+                                    <label for="name">Your Name</label>
+                                </div>
+                                <div ng-show="myForm.name1.$dirty && myForm.name1.$error.required" class="text-danger">
+                                    Name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" required class="form-control" id="email" placeholder="Your Email" name="email" ng-model="formData.email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                                <div ng-show="myForm.email.$dirty && myForm.email.$error.required" class="text-danger">
+                                    Email is required.
+                                </div>
+                                <div ng-show="myForm.email.$dirty && myForm.email.$error.email" class="text-danger">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" required ng-pattern="/^[a-zA-Z]+$/" class="form-control" id="subject" name=" subject" placeholder="Subject" ng-model="formData.subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                                <div ng-show="myForm.subject.$dirty && myForm.subject.$error.required" class="text-danger">
+                                    Subject is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" required ng-pattern="/^[a-zA-Z]+$/" class="form-control" id="message" name="message" placeholder="Message" ng-model="formData.message">
+                                    <label for="message">Your Message</label>
+                                </div>
+                                <div ng-show="myForm.message.$dirty && myForm.message.$error.required" class="text-danger">
+                                    Message is required.
+                                </div>
+                            </div>
+                          
+                            <div class="col-12">
+                                <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
+                            </div>
+                            <div class="message-container" ng-show="message">
+    <p ng-class="{'success-message': message.type === 'success', 'error-message': message.type === 'error'}">{{ message.text }}</p>
+  </div>
+                        </div>
+                    </form> -->
+                    <form name="myForm" 
+                 
+                 ng-submit="myForm.$valid && submitForm()"
+                 novalidate
+                         >
+                             <div class="row g-3">
+                                 <div class="col-md-6">
+                                     <div class="form-floating">
+                                         <input type="text" required class="form-control" id="name1" ng-pattern="/^[a-zA-Z ]+$/"  placeholder="Your Name" name="name1" ng-model="formData.name1">
+                                         <label for="name">Your Name</label>
+                                     </div>
+                                     <!-- <div ng-show="myForm.name1.$dirty && myForm.name1.$error.required" class="text-danger">
+                                         Name is required.
+                                     </div> -->
+                                     <div ng-show="myForm.name1.$dirty && myForm.name1.$error.pattern" class="text-danger">
+                                        Please enter a valid name containing only alphabets and spaces.
+                                    </div>
+                                    <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.name1.$error.required"
+                                    >
+                                    Name is required.
+                                    </span>
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="form-floating">
+                                         <input type="email" ng-change="convertToLowerCase()" required class="form-control" id="email" placeholder="Your Email" name="email" ng-model="formData.email">
+                                         <label for="email">Your Email</label>
+                                     </div>
+                                        <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.email.$error.required"
+                                    >
+                                    Email is required.
+                                    </span>
+                                     <!-- <div ng-show="myForm.email.$dirty && myForm.email.$error.required" class="text-danger">
+                                         Email is required.
+                                     </div> -->
+                                     <div ng-show="myForm.email.$dirty && myForm.email.$error.email" class="text-danger">
+                                         Please enter a valid email address.
+                                     </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="form-floating">
+                                         <input type="text" required  class="form-control" ng-minlength="5" ng-maxlength="100" id="subject" name="subject" placeholder="Subject" ng-model="formData.subject">
+                                         <label for="subject">Subject</label>
+                                     </div>
+                                     <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.subject.$error.required"
+                                    >
+                                    Subject is required.
+                                    </span>
+                                     <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.subject.$error.minlength"
+                                    >
+                                    Minimum 5 characters is required.
+                                    </span>
+                                     <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.subject.$error.maxlength"
+                                    >
+                                    Not more than 100 characters.
+                                    </span>
+                                     <!-- <div ng-show="myForm.subject.$dirty && myForm.subject.$error.required" class="text-danger">
+                                         Subject is required.
+                                     </div> -->
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="form-floating">
+                                         <input type="text" required class="form-control" ng-minlength="5" ng-maxlength='100' id="message" name="message" placeholder="Message" ng-model="formData.message">
+                                         <label for="message">Your Message</label>
+                                     </div>
+                                       <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.message.$error.maxlength"
+                                    >
+                                    Not more than 100 characters.
+                                    </span>
+                                     <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.message.$error.minlength"
+                                    >
+                                    Minimum 5 characters is required.
+                                    </span>
+                                     <span
+                                        style="color: red"
+                                        ng-show="myForm.$submitted && myForm.message.$error.required"
+                                    >
+                                    Message is required.
+                                    </span>
+                                     <!-- <div ng-show="myForm.message.$dirty && myForm.message.$error.required" class="text-danger">
+                                         Message is required.
+                                     </div> -->
+                                 </div>
+                               
+                                 <div class="col-12">
+                                     <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
+                                 </div>
+                                 <div class="message-container" ng-show="message">
+         <p ng-class="{'success-message': message.type === 'success', 'error-message': message.type === 'error'}">{{ message.text }}</p>
+       </div>
+                             </div>
+                         </form> 
+                </div>
             </div>
         </div>
     </div>
+ 
 
     <div class="container-fluid bg-dark text-white py-4">
             <div class="container m-auto">
@@ -312,7 +493,48 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+    <script>
+    var app = angular.module('myApp', []);
 
+    app.controller('myCtrl', function ($scope, $http,$timeout) {
+      $scope.formData = {};
+      $scope.message = null;
+      $scope.convertToLowerCase = function () {
+        if ($scope.formData.email) {
+            $scope.formData.email = $scope.formData.email.toLowerCase();
+        }
+    };
+      $scope.submitForm = function () {
+        $http.post('back.php', $scope.formData)
+          .then(function (response) {
+            // Handle success
+            if (response.data.status === 'success') {
+              console.log('Data sent successfully', response.data.message);
+              $scope.message = { type: 'success', text: response.data.message };
+              $timeout(function () {
+              $scope.message = "";
+            }, 3000);
+            $scope.formData = {};
+            $scope.myForm.$setPristine();
+            $scope.myForm.$setUntouched();
+            } else {
+              console.error('Error sending data', response.data.message);
+              $scope.message = { type: 'error', text: response.data.message };
+              $timeout(function () {
+              $scope.message = "";
+            }, 3000);
+            $scope.formData = {};
+            $scope.myForm.$setPristine();
+            $scope.myForm.$setUntouched();
+            }
+          })
+          .catch(function (error) {
+            console.error('Error sending data', error);
+            $scope.message = { type: 'error', text: 'Error sending data. Please try again later.' };
+          });
+      };
+    });
+  </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
